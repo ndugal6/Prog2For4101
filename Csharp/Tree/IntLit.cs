@@ -22,5 +22,10 @@ namespace Tree
         {
             return true;
         }
+
+        public override Node eval(Node a, Environment e) 
+        {
+            return a;
+        }
     }
 }

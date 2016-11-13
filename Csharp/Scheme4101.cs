@@ -48,14 +48,26 @@ public class Scheme4101
         TreeBuilder builder = new TreeBuilder();
         Parser parser = new Parser(scanner, builder);
         Node root;
+        
 
         // TODO: Create and populate the built-in environment and
         // create the top-level environment
 
         // Read-eval-print loop
 
+
         // TODO: print prompt and evaluate the expression
         root = (Node) parser.parseExp();
+        Environment e = new Environment();
+        
+        if (root.isSymbol()) {
+            root = Ident.eval(root,e);
+        } else if (root.isNumber()) {
+            root = IntLit.eval(root,e);
+        } else if (root.isString()) {
+            root = StringLit.eval(root,e);
+        } 
+        
         while (root != null) 
         {
             root.print(0);
