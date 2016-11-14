@@ -43,9 +43,23 @@ namespace Tree
         // TODO: The method apply() should be defined in class Node
         // to report an error.  It should be overridden only in classes
         // BuiltIn and Closure.
-        public /* override */ Node apply (Node args)
+        public override Node apply (Node args)
         {
-            return new StringLit("Error: Closure.apply not yet implemented");
+            Environment e = this.getEnv();
+            Node notFun = getFun();
+            Node car = notFun.getCar();
+            notFun = notFun.getCdr().getCar();
+            while(args != null && !args.getCar().isNull()) {
+                e.define(car.getCar(), args.getCar());
+                car = car.getCdr();
+                args = args.getCdr();
+            }
+
+            return notFun.eval(e);
+        }
+
+        public Node eval(Node a, Environment e) {
+            return Nil.getInstance();
         }
     }    
 }
