@@ -48,8 +48,68 @@ public class Scheme4101
         TreeBuilder builder = new TreeBuilder();
         Parser parser = new Parser(scanner, builder);
         Node root;
-        
+        Ident id;
 
+        Environment e = new Environment();
+        id = new Ident("b+");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("b-");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("b*");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("b/");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("b=");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("b<");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("b>");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("car");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("cdr");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("cons");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("set-car!");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("set-cdr!");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("symbol?");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("number?");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("null?");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("pair?");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("eq?");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("procedure?");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("display");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("newline");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("exit");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("quit");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("read");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("write");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("eval");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("apply");
+        e.define(id,new BuiltIn(id));
+        id = new Ident("interaction-environment");
+        e.define(id,new BuiltIn(id));
+        Environment newEnv = new Environment(e);
+        BuiltIn topBuild = new BuiltIn(newEnv);
+
+
+        
         // TODO: Create and populate the built-in environment and
         // create the top-level environment
 
@@ -57,17 +117,16 @@ public class Scheme4101
 
 
         // TODO: print prompt and evaluate the expression
+        
+        // Environment e = new Environment();
+        // if (root.isSymbol()) {
+        //     root = Ident.eval(root,e);
+        // } else if (root.isNumber()) {
+        //     root = IntLit.eval(root,e);
+        // } else if (root.isString()) {
+        //     root = StringLit.eval(root,e);
+        // } 
         root = (Node) parser.parseExp();
-        Environment e = new Environment();
-        
-        if (root.isSymbol()) {
-            root = Ident.eval(root,e);
-        } else if (root.isNumber()) {
-            root = IntLit.eval(root,e);
-        } else if (root.isString()) {
-            root = StringLit.eval(root,e);
-        } 
-        
         while (root != null) 
         {
             root.print(0);

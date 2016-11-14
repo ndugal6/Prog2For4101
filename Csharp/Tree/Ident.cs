@@ -28,7 +28,7 @@ namespace Tree
             return true;
         }
 
-        public override Node eval(Node a, Environment e) {
+        public override Node eval(Environment e) {
             return e.lookup(a).getCar();
         }
     }

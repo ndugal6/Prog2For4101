@@ -12,16 +12,21 @@ namespace Tree
         {
             Printer.printIf(t, n, p);
         }
-        // public virtual Node eval(Node a, Environment e) {
-
-        // }
-        // public override Node eval(Node a, Environment e, bool p) 
-        // {
-        //     if (p) 
-        //         eval(a.getCdr().getCar(), e);
-        //     else 
-        //         eval(a.getCdr().getCdr(), e);
-        // }
+       public override Node eval(Node a, Environment e) 
+        {
+           Node condition = a.getCdr().getCar();
+           Node expression;
+           if (condition.eval(e).getBoolean()) {
+               expression = a.getCdr().getCdr().getCar();
+               return expression.eval(e);
+           } else if (!(a.getCdr().getCdr().getCdr()).isNull()) {
+               expression = a.getCdr().getCdr().getCdr().getCar();
+               return expression.eval(e);
+           } else {
+               Console.Error.WriteLine("There's not an else expression");
+               return Nil.getInstance();
+           }
+        }
     }
 }
 
