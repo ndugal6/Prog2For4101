@@ -106,27 +106,29 @@ namespace Tree
 
         public void define(Node id, Node val)
         {
-            //Used to lookup if name exist in innermost scope
-            if (lookup(id) == null) {
-                //May need to change new Nil() to Nil.getInstance() bc we want one Nil node with many references.... If I understand this correctly
-                Node newKey = new Cons(val, new Nil());
-                frame = new Cons(newKey, frame);
-                //adds name-value pair as first element in frame - the innnermost scope 
+            Node value = find(id, frame);
+            if (value == null) {
+                frame = new Cons(new Cons(id, new Cons(val, Nil.getInstance())),frame);
             } else {
-                find(id, val).setCar(val);
-                //Updates value
+                value.setCar(val);
             }
         }
 
 
         public void assign(Node id, Node val)
         {
-            if (lookup(id) == null) 
-                Console.Error.WriteLine(id.getName() + " not found");
-                //Not found so there's an assignment error 
-            else 
-                find(id, val).setCar(val);
-                //Updates value
+            Node calue = find(id, frame);
+            if (value == null && e == null) {
+                Console.Error.WriteLine("Variable not defined! :( ");
+            } else if (value == null) {
+                assign(id, e);
+            } else {
+                setCar(new Cons(id, val));
+            }
+        }
+
+        public Node eval(Node a, Environment e) {
+            return Nil.getInstance();
         }
     }
 }

@@ -89,5 +89,9 @@ namespace Tree
         {
             return true;
         }
+
+        public Node eval(Environment e) {
+            return form.eval(this, e);
+        }
     }
 }
