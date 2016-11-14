@@ -103,29 +103,15 @@ public class Scheme4101
         e.define(id,new BuiltIn(id));
         id = new Ident("apply");
         e.define(id,new BuiltIn(id));
-        id = new Ident("interaction-environment");
-        e.define(id,new BuiltIn(id));
         Environment newEnv = new Environment(e);
         BuiltIn topBuild = new BuiltIn(newEnv);
-
-
         
         // TODO: Create and populate the built-in environment and
         // create the top-level environment
 
         // Read-eval-print loop
 
-
         // TODO: print prompt and evaluate the expression
-        
-        // Environment e = new Environment();
-        // if (root.isSymbol()) {
-        //     root = Ident.eval(root,e);
-        // } else if (root.isNumber()) {
-        //     root = IntLit.eval(root,e);
-        // } else if (root.isString()) {
-        //     root = StringLit.eval(root,e);
-        // } 
         root = (Node) parser.parseExp();
         while (root != null) 
         {

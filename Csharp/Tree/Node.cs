@@ -42,17 +42,20 @@ namespace Tree
         public virtual bool isNull()   { return false; }  // Nil
         public virtual bool isPair()   { return false; }  // Cons
         public virtual bool isProcedure()	{ return false; } // BuiltIn
-        
-        public virtual Node eval(Node a, Environment e) 
+
+        public virtual Node eval(Environment e)  
         {
-            Console.Error.WriteLine("Should be sent to Node's subclass");
-            return null;
-        } 
-        public virtual Node eval(Node a, Environment e, bool val)  {return null;}
+            if(this.isSymbol())
+            {
+                Ident id = new Ident(this.getName());
+                return id.eval(this, e);
+            }
+            return this;
+        }
+        
         public virtual Node apply (Node args)
         {
-            Console.Error.WriteLine("Error: argument of apply is not a pair");
-            return null;
+            return Nil.getInstance();
     	}
 
         // Since C# does not have covariant override, it is not possible

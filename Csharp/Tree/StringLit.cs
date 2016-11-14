@@ -25,7 +25,7 @@ namespace Tree
 
         public override Node eval(Node a, Environment e) 
         {
-            return a;
+            return this;
         }
 
         public String getStringVal() {
@@ -33,4 +33,3 @@ namespace Tree
         }
     }
 }
-
